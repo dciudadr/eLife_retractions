@@ -2,7 +2,7 @@ import os
 from io import BytesIO
 import tarfile
 from tempfile import TemporaryDirectory
-from mock import patch
+from unittest.mock import patch
 
 import pytest
 
