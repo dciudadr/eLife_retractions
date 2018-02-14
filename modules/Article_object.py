@@ -75,8 +75,6 @@ class Article_object(object):
             return
             
             
-            
-        
         mask = df_pmc_ids.DOI == self.doi
         
         df_PMC_journal = df_pmc_ids[mask]
