@@ -12,7 +12,7 @@ imp.reload(find_section)
 imp.reload(find_citation)
 
 
-def get_df(DOI, list_papers):
+def get_df(DOI, list_papers, number_of_additional_sentences_after_citation = 0):
     """
     Returns dataframe:
     df['cited_DOI', 'citing_DOI', 'reference_id', 'introduction_found', 'cited_in_introduction', 'maintext_found', 'cited_in_maintext', 'discussion_found', 'cited_in_discussion', 'conclusions_found', 'cited_in_conclusions', 'sentence_citing_intro', 'sentence_citing_maintext', 'sentence_citing_discussion', 'sentence_citing_conclusions']
@@ -81,8 +81,11 @@ def get_df(DOI, list_papers):
         cited_in_introduction = find_citation.is_cited(str(introduction), reference_id)
         cited_in_introduction_list.append(cited_in_introduction)
         
-        citing_sentences_intro = find_citation.sentences(introduction, reference_id)
+        citing_sentences_intro = find_citation.sentences(introduction, reference_id, number_of_additional_sentences_after_citation)
         citing_sentences_intro_list.append(citing_sentences_intro)
+    
+    
+    
     
         # MAIN TEXT 
         maintext = find_section.maintext(article)
@@ -94,7 +97,7 @@ def get_df(DOI, list_papers):
         cited_in_maintext = find_citation.is_cited(str(maintext), re.sub(' +',' ', reference_id).strip()) # In find_section to get the maintext we are removing whitespaces
         cited_in_maintext_list.append(cited_in_maintext)
         
-        citing_sentences_maintext = find_citation.sentences(maintext, re.sub(' +',' ', reference_id).strip())
+        citing_sentences_maintext = find_citation.sentences(maintext, re.sub(' +',' ', reference_id).strip(), number_of_additional_sentences_after_citation)
         citing_sentences_maintext_list.append(citing_sentences_maintext)
         
         # DISCUSSION
@@ -107,7 +110,7 @@ def get_df(DOI, list_papers):
         cited_in_discussion = find_citation.is_cited(str(discussion), reference_id)
         cited_in_discussion_list.append(cited_in_discussion)
         
-        citing_sentences_discussion = find_citation.sentences(discussion, reference_id)
+        citing_sentences_discussion = find_citation.sentences(discussion, reference_id, number_of_additional_sentences_after_citation)
         citing_sentences_discussion_list.append(citing_sentences_discussion)
         
         # CONCLUSIONS
@@ -120,7 +123,7 @@ def get_df(DOI, list_papers):
         cited_in_conclusions = find_citation.is_cited(str(conclusions), reference_id)
         cited_in_conclusions_list.append(cited_in_conclusions)
         
-        citing_sentences_conclusions = find_citation.sentences(conclusions, reference_id)
+        citing_sentences_conclusions = find_citation.sentences(conclusions, reference_id, number_of_additional_sentences_after_citation)
         citing_sentences_conclusions_list.append(citing_sentences_conclusions)
         
         # REFERENCES
