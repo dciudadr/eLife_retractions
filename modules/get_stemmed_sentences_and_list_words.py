@@ -45,11 +45,11 @@ def get_stemmed_sentences_and_list_words(list_sentences, classification):
 
     
 
-def get_tuple_articles_stemmed_classified_and_list_words(list_sentences_before, list_sentences_after):
+def get_tuple_articles_stemmed_classified_and_list_words(list_sentences_before, list_sentences_after, label_before = 'before', label_after = 'after'):
 
-    document_before, list_words_before, list_bigrams_before = get_stemmed_sentences_and_list_words(list_sentences_before, "before")
+    document_before, list_words_before, list_bigrams_before = get_stemmed_sentences_and_list_words(list_sentences_before, label_before)
 
-    document_after, list_words_after, list_bigrams_after = get_stemmed_sentences_and_list_words(list_sentences_after, "after")
+    document_after, list_words_after, list_bigrams_after = get_stemmed_sentences_and_list_words(list_sentences_after, label_after)
 
     documents_before_and_after = document_before +  document_after
     random.shuffle(documents_before_and_after)
