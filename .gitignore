@@ -1,3 +1,9 @@
 .cache
+.data
+..data
 
 *.pyc
+
+*.csv
+
+*.cv.gz
