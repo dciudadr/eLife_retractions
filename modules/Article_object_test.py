@@ -66,4 +66,3 @@ class Test_Article_object_methods(object):
         article_test.get_text_from_tar_file_using_pmc()
         assert article_test.pmc == ""
         
-        

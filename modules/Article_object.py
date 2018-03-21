@@ -2,7 +2,9 @@ import pandas as pd
 import tarfile
 import re
 import string
+
 import datetime
+#from datetime import datetime
 from bs4 import BeautifulSoup
 
 
@@ -29,6 +31,7 @@ class Article_object(object):
 
     def get_pmc_and_journal_from_pmid(self):
         
+
         """
         DEPRECATED - USED in Retractionwatch notebook. 
         Use get_pmc_doi_and_journal_from_pmid instead.
@@ -98,7 +101,7 @@ class Article_object(object):
  
  
  
- 
+
  ########################       
     
     def get_pmc_and_journal_from_doi(self):
@@ -210,6 +213,7 @@ class Article_object(object):
 
     def get_list_references_dois_from_text(self):
         
+
         """
         DEPRECATED - USED in Retractionwatch notebook. 
         Use get_list_references_dois_and_pmids_from_text instead.
@@ -402,3 +406,62 @@ class Article_object(object):
 
 
             
+=======
+                """
+                Note that this is not just taking the doi, it could be anything under the pub-id tag such as pmid:
+                You should do:
+                
+                reference_doi = reference.find('pub-id', {"pub-id-type": "doi"}).text
+                list_doi_refernces.append (reference_doi)
+                reference_pmid = reference.find('pub-id', {"pub-id-type": "pmid"}).text
+                list_pmid_refernces.append (reference_pmid)
+                
+                or better save this a as list of dictionaries:
+                
+                reference_doi = reference.find('pub-id', {"pub-id-type": "doi"}).text
+                reference_pmid = reference.find('pub-id', {"pub-id-type": "pmid"}).text
+                reference_pmc = reference.find('pub-id', {"pub-id-type": "pmcid"}).text
+                list_dictionary.append({"doi": reference_doi, "pmid": reference_pmid, "pmc": pmcid})
+                 
+                if not pub-id type = doi and pmid it will fail. COMPLETE CODE:
+                
+                
+                %%%%%%%%%%%%%%%% HERE ####################
+                def get_list_references_dois_from_text(self):
+                    
+                    list_dict_references_ids = []
+                    list_dict_references_ids = []
+                    
+                    manuscript_BS = BeautifulSoup(str(self.text), "lxml") 
+                
+                    for reference in  manuscript_BS.find_all('ref'):
+                        reference_doi = ""
+                        reference_pmid = ""
+                        
+                        try:
+                            reference_doi = reference.find('pub-id', {"pub-id-type": "doi"}).text
+                        except AttributeError:
+                            pass
+                        
+                        try:
+                            reference_pmid = reference.find('pub-id', {"pub-id-type": "pmid"}).text
+                        except AttributeError:
+                            pass
+                        
+                        if reference_doi != "" or reference_pmid != "":
+                            list_dict_references_ids.append({"doi": reference_doi, "pmid": reference_pmid})
+                            #print(reference.find('pub-id', {"pub-id-type": "pmid"}))
+                            
+                    return list_dict_references_ids
+                    
+                   
+                                
+                """
+            except AttributeError:
+                pass
+        
+        self.references_dois = list_doi_references
+        return
+        
+        
+
