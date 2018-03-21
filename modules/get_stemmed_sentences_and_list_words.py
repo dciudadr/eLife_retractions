@@ -22,6 +22,20 @@ stop_words = set(stopwords.words('english')) - set(["while", "against", "before"
                                                     "wasn", "wasn't", "weren", "weren't", "won"," won't",
                                                     "wouldn", "wouldn't"])
 
+
+def get_stemmed_sentence(list_sentences):
+    list_stemmed_sentences = []
+    for sentence in list_sentences:    
+        filtered_sentence = []
+        word_tokens = word_tokenize(sentence)
+        for word in word_tokens:
+            word = re.sub("[\d?, '\W+]", "", word) #Let's remove any number
+            if (len(word) > 2) and (not word in stop_words):
+                filtered_sentence.append(ps.stem(word.lower()))    
+        list_stemmed_sentences.append(filtered_sentence)    
+    return list_stemmed_sentences
+
+
 def get_stemmed_sentences_and_list_words(list_sentences, classification):
     list_all_words = []
     document_stemmed = []
