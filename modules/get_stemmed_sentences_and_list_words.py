@@ -12,7 +12,7 @@ from nltk.stem import PorterStemmer
 ps = PorterStemmer()
 
 # We will keep words from stopwords that could be used when criticing
-stop_words = set(stopwords.words('english')) - set(["while", "against", "before", "after", "just", "don", 
+stop_words = set(stopwords.words('english')) - set(["but", "while", "against", "before", "after", "just", "don", 
                                                     "don't", "should", "should've", "no", "nor", "not",
                                                     "ain", "aren", "aren't", "couldn", "couldn't", "didn",
                                                     "didn't", "doesn", "doesn't", "hadn", "hadn't", "hasn",
@@ -30,8 +30,9 @@ def get_stemmed_sentence(list_sentences):
         word_tokens = word_tokenize(sentence)
         for word in word_tokens:
             word = re.sub("[\d?, '\W+]", "", word) #Let's remove any number
-            if (len(word) > 2) and (not word in stop_words):
-                filtered_sentence.append(ps.stem(word.lower()))    
+            word = word.lower()
+            if ((len(word) > 2) and (not word in stop_words)) or (word == 'no'):
+                filtered_sentence.append(ps.stem(word))    
         list_stemmed_sentences.append(filtered_sentence)    
     return list_stemmed_sentences
 
@@ -44,7 +45,8 @@ def get_stemmed_sentences_and_list_words(list_sentences, classification):
         word_tokens = word_tokenize(sentence)
         for word in word_tokens:
             word = re.sub("[\d?, '\W+]", "", word) #Let's remove any number
-            if (len(word) > 2) and (not word in stop_words):
+            word = word.lower()
+            if ((len(word) > 2) and (not word in stop_words)) or (word == 'no'):
                 filtered_sentence.append(ps.stem(word.lower()))    
                 list_all_words.append(ps.stem(word.lower()))  
         document_stemmed.append((filtered_sentence, classification))
