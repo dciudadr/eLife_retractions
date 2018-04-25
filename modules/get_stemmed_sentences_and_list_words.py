@@ -23,6 +23,11 @@ stop_words = set(stopwords.words('english')) - set(["but", "while", "against", "
                                                     "wouldn", "wouldn't"])
 
 
+with open('./english_words/wordsEn.txt', 'r') as word_file:
+    english_words = set(word.strip().lower() for word in word_file)
+
+
+
 def get_stemmed_sentence(list_sentences):
     list_stemmed_sentences = []
     for sentence in list_sentences:    
@@ -30,10 +35,11 @@ def get_stemmed_sentence(list_sentences):
         word_tokens = word_tokenize(sentence)
         for word in word_tokens:
             word = re.sub("[\d?, '\W+]", "", word) #Let's remove any number
-            word = word.lower()
-            if ((len(word) > 2) and (not word in stop_words)) or (word == 'no'):
+            word = word.strip().lower()
+            if ((len(word) > 2) and (not word in stop_words) and (word in english_words)) or (word == 'no'):
                 filtered_sentence.append(ps.stem(word))    
         list_stemmed_sentences.append(filtered_sentence)    
+        
     return list_stemmed_sentences
 
 
@@ -45,8 +51,8 @@ def get_stemmed_sentences_and_list_words(list_sentences, classification):
         word_tokens = word_tokenize(sentence)
         for word in word_tokens:
             word = re.sub("[\d?, '\W+]", "", word) #Let's remove any number
-            word = word.lower()
-            if ((len(word) > 2) and (not word in stop_words)) or (word == 'no'):
+            word = word.strip().lower()
+            if ((len(word) > 2) and (not word in stop_words) and (word in english_words)) or (word == 'no'):
                 filtered_sentence.append(ps.stem(word.lower()))    
                 list_all_words.append(ps.stem(word.lower()))  
         document_stemmed.append((filtered_sentence, classification))

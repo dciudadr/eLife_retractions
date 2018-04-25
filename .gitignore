@@ -3,7 +3,11 @@
 ..data
 
 *.pyc
-
 *.csv
+*.txt
+*.zip
+*.zip.1
+*.zip.2
+*.zip.3
 
 *.cv.gz

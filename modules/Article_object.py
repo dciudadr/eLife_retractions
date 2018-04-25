@@ -406,8 +406,8 @@ class Article_object(object):
 
 
             
-=======
-                """
+#=======
+"""
                 Note that this is not just taking the doi, it could be anything under the pub-id tag such as pmid:
                 You should do:
                 
@@ -456,12 +456,12 @@ class Article_object(object):
                     
                    
                                 
-                """
+
             except AttributeError:
                 pass
         
         self.references_dois = list_doi_references
         return
-        
+"""        
         
 
