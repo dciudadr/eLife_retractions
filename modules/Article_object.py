@@ -175,7 +175,7 @@ class Article_object(object):
                 print("no journal defined")
                 return files_to_check
 
-        startTime = datetime.now()
+        startTime = datetime.datetime.now()
         
         
         
@@ -198,12 +198,12 @@ class Article_object(object):
                     print("Article found: ", filename.name)
                     paper = tar.extractfile(filename)
                     self.text = paper.read()
-                    print("Search total time = ",  datetime.now() - startTime )
+                    print("Search total time = ",  datetime.datetime.now() - startTime )
                     return
             tar.close()
             
             
-            print("Search total time = ",  datetime.now() - startTime )
+            print("Search total time = ",  datetime.datetime.now() - startTime )
         
 
         self.text = "Article not found" 
