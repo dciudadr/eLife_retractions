@@ -9,7 +9,7 @@ HOST_PORT=8889
 
 start() {
   docker run \
-    -d -p $HOST_PORT:8888 \
+    -p $HOST_PORT:8888 \
     -v $HOST_PROJECT_HOME:$CONTAINER_PROJECT_HOME \
     $IMAGE_NAME \
     start-notebook.sh \
