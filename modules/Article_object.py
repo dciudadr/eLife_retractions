@@ -42,13 +42,13 @@ class Article_object(object):
             return
         
         try:
-            df_pmc_ids = pd.read_csv('/project/eLife_retractions/data/PMC_ids/PMC-ids.csv', 
+            df_pmc_ids = pd.read_csv('./data/PMC_ids/PMC-ids.csv', 
                          sep=',', 
                          encoding='utf-8',
                          low_memory=False
                          )
         except FileNotFoundError:
-            print("/project/eLife_retractions/data/PMC_ids/PMC-ids.csv not found")
+            print("./data/PMC_ids/PMC-ids.csv not found")
             return
             
         df_pmc_ids.PMID = df_pmc_ids.PMID.apply(lambda x: str(x)[:-2])
@@ -74,13 +74,13 @@ class Article_object(object):
             return
     
         try:
-            df_pmc_ids = pd.read_csv('/project/eLife_retractions/data/PMC_ids/PMC-ids.csv', 
+            df_pmc_ids = pd.read_csv('./data/PMC_ids/PMC-ids.csv', 
                          sep=',', 
                          encoding='utf-8',
                          low_memory=False
                          )
         except FileNotFoundError:
-            print("/project/eLife_retractions/data/PMC_ids/PMC-ids.csv not found")
+            print("./data/PMC_ids/PMC-ids.csv not found")
             return
     
         df_pmc_ids.PMID = df_pmc_ids.PMID.apply(lambda x: str(x)[:-2])
@@ -111,13 +111,13 @@ class Article_object(object):
             return
         
         try:
-            df_pmc_ids = pd.read_csv('/project/eLife_retractions/data/PMC_ids/PMC-ids.csv', 
+            df_pmc_ids = pd.read_csv('./data/PMC_ids/PMC-ids.csv', 
                          sep=',', 
                          encoding='utf-8',
                          low_memory=False
                          )
         except FileNotFoundError:
-            print("/project/eLife_retractions/data/PMC_ids/PMC-ids.csv not found")
+            print("./data/PMC_ids/PMC-ids.csv not found")
             return
             
             
@@ -188,7 +188,7 @@ class Article_object(object):
 
        
         for file in list_tar_files:
-            file_path = '/project/data/' + file
+            file_path = './data/' + file
             print("Checking: ", file_path)
     
             tar = tarfile.open(file_path, "r:gz")

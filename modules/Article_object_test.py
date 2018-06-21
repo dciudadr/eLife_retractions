@@ -1,6 +1,7 @@
 import os
 from io import BytesIO
 import tarfile
+from pathlib import Path
 # from tempfile import TemporaryDirectory
 # from mock import patch
 
@@ -10,8 +11,11 @@ import tarfile
 import Article_object as Article_object
 
 
-#article_test = Article_object.Article_object()
+os.chdir(Path(os.getcwd()).parent)
 
+
+#article_test = Article_object.Article_object()
+os.path.dirname(os.getcwd())
 
 class Test_Article_object_methods(object):                  
   
